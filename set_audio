@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+if [ $# -eq 0 ]
+then
+  names=$(pacmd list-sinks | grep alsa.long_card_name | sed -e 's/^.*= "//g' -e 's/at .*"//g')
+  indexes=$(pacmd list-sinks | grep index | sed -e 's/^.*index: //g')
+  default_star=$(pacmd list-sinks | grep index | sed -e 's/index.*//g' -e 's/ *//g')
+  paste -d " " <(echo "$indexes") <(echo "$default_star") <(echo "$names")
+  exit 0
+fi
+
+
+pacmd set-default-sink $1
+
+sink_inputs=$(pacmd list-sink-inputs | grep index | sed 's/    index: //g')
+for sink_input in $sink_inputs
+do
+    #change input $sink_input to $1
+    pacmd move-sink-input $sink_input $1
+done
