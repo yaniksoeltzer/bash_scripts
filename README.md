@@ -1,6 +1,6 @@
 # bash_scripts
 A collection of nice bash scripts, to help out every day.
-Best copy scripts to '~/bin'.
+Best copy scripts to `~/bin`.
 
 The following content describes each script individually
 
