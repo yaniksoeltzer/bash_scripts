@@ -10,6 +10,12 @@ then
   exit 0
 fi
 
+if [[ "$1" -eq "reload" ]]
+then
+  echo "reloading pulseaudio modules"
+  pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
+  exit 0
+fi
 
 pacmd set-default-sink $1
 
